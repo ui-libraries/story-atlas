@@ -4,9 +4,11 @@ import {
     endpoint
 } from '../src/config'
 import * as Collection from '../src/collection'
-import * as File from '../src/file'
 import * as Item from '../src/item'
-const mapboxToken = 'pk.eyJ1IjoibXRidXRsZXIiLCJhIjoiY2pjdzFxaHhiNGt0MjJybnh6OTJnZ3h4dyJ9.KlVoNBd74vYAs16sOxN87w'
+
+getInfo(endpoint, 1).then(config => {
+  buildMap(config)
+})
 
 function getMetadata(elementTexts, metadataFieldName) {
     let result = ''
@@ -45,6 +47,7 @@ async function getInfo(endpoint, collectionID) {
     let byline = getMetadata(collData.element_texts, "Creator")
     let footer = getMetadata(collData.element_texts, "Rights")
     let style = getMetadata(collData.element_texts, "Format")
+    let mapboxToken = getMetadata(collData.element_texts, "Rights")
 
     let config = {
         style: style,
@@ -61,10 +64,6 @@ async function getInfo(endpoint, collectionID) {
 
     return config
 }
-
-getInfo(endpoint, 1).then(config => {
-  buildMap(config)
-})
 
 function buildMap(config) {
     let layerTypes = {
