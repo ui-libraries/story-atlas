@@ -50,9 +50,9 @@ async function getInfo(endpoint, collectionID) {
     let title = getMetadata(collData.element_texts, "Title")
     let subtitle = getMetadata(collData.element_texts, "Description")
     let byline = getMetadata(collData.element_texts, "Creator")
-    let footer = getMetadata(collData.element_texts, "Rights")
+    let footer = `Copyright ©${getMetadata(collData.element_texts, "Date Copyrighted")}, ${getMetadata(collData.element_texts, "Creator")}`
     let style = getMetadata(collData.element_texts, "Format")
-    let mapboxToken = getMetadata(collData.element_texts, "Rights")
+    let mapboxToken = getMetadata(collData.element_texts, "Access Rights")
 
     let config = {
         style: style,
