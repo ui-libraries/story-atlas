@@ -34,20 +34,20 @@ export function build(config) {
     let header = document.createElement('div');
 
     if (config.title) {
-        let titleText = document.createElement('h1');
-        titleText.innerText = config.title;
+        let titleText = document.createElement('div');
+        titleText.innerHTML = config.title;
         header.appendChild(titleText);
     }
 
     if (config.subtitle) {
-        let subtitleText = document.createElement('h2');
-        subtitleText.innerText = config.subtitle;
+        let subtitleText = document.createElement('div');
+        subtitleText.innerHTML = config.subtitle;
         header.appendChild(subtitleText);
     }
 
     if (config.byline) {
-        let bylineText = document.createElement('p');
-        bylineText.innerText = config.byline;
+        let bylineText = document.createElement('div');
+        bylineText.innerHTML = config.byline;
         header.appendChild(bylineText);
     }
 
@@ -62,8 +62,8 @@ export function build(config) {
         let chapter = document.createElement('div');
 
         if (record.title) {
-            let title = document.createElement('h3');
-            title.innerText = record.title;
+            let title = document.createElement('div');
+            title.innerHTML = record.title;
             chapter.appendChild(title);
         }
 
@@ -74,9 +74,15 @@ export function build(config) {
         }
 
         if (record.description) {
-            let story = document.createElement('p');
+            let story = document.createElement('div');
             story.innerHTML = record.description;
             chapter.appendChild(story);
+        }
+
+        if (record.embed) {
+            let embed = document.createElement('div');
+            embed.innerHTML = record.embed;
+            chapter.appendChild(embed);
         }
 
         container.setAttribute('id', record.id);
@@ -95,7 +101,7 @@ export function build(config) {
     let footer = document.createElement('div');
 
     if (config.footer) {
-        let footerText = document.createElement('p');
+        let footerText = document.createElement('div');
         footerText.innerHTML = config.footer;
         footer.appendChild(footerText);
     }

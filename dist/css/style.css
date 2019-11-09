@@ -19,8 +19,8 @@ a:visited {
 }
 
 #header {
-	margin: 3vh auto;
-	width: 60vw;
+	margin: 0 auto;
+	width: 100%;
 	padding: 2vh;
 	text-align: center;
 }
@@ -77,13 +77,27 @@ a:visited {
 }
 
 .step div {
-	padding: 25px 50px;
+	padding: 5px 5px;
 	line-height: 25px;
 	font-size: 13px;
 }
 
 .step img {
 	width: 100%;
+}
+
+.video-responsive{
+    overflow:hidden;
+    padding-bottom:56.25%;
+    position:relative;
+    height:315px;
+}
+.video-responsive iframe{
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
 }
 
 @media (max-width: 750px) {

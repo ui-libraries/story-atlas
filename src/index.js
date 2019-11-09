@@ -26,6 +26,13 @@ function getMetadata(elementTexts, metadataFieldName) {
     return result
 }
 
+function getEmbedCode(relation) {
+    //Youtube only for now
+    let replaced = _.replace(relation, 'watch?v=', 'embed/')
+    let embed = `<div class="video-responsive"><iframe src="${replaced}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen"></iframe></div>`
+    return embed
+}
+
 async function getInfo(endpoint, collectionID) {
     let chapters = []
     let collection = Collection.getCollectionMetadataById(endpoint, collectionID)
@@ -40,6 +47,8 @@ async function getInfo(endpoint, collectionID) {
         chapter.title = getMetadata(itemsData[i].element_texts, "Title")
         chapter.description = getMetadata(itemsData[i].element_texts, "Description")
         let location = getMetadata(itemsData[i].element_texts, "Spatial Coverage")
+        let relation = getMetadata(itemsData[i].element_texts, "Relation")
+        chapter.embed = getEmbedCode(relation)
         chapter.date = moment(getMetadata(itemsData[i].element_texts, "Date")).valueOf()
         chapter.location = JSON.parse(location)
         chapter.onChapterEnter = []
@@ -54,7 +63,7 @@ async function getInfo(endpoint, collectionID) {
     let subtitle = getMetadata(collData.element_texts, "Description")
     let byline = getMetadata(collData.element_texts, "Creator")
     let footer = `Copyright ©${getMetadata(collData.element_texts, "Date Copyrighted")}, ${getMetadata(collData.element_texts, "Creator")}`
-    let style = getMetadata(collData.element_texts, "Format")
+    let style = getMetadata(collData.element_texts, "Requires")
     let mapboxToken = getMetadata(collData.element_texts, "Access Rights")
 
     let config = {
