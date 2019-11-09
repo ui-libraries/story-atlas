@@ -1,5 +1,6 @@
 import Fetch from 'node-fetch'
 import * as _ from 'lodash'
+import moment from 'moment'
 import {
     endpoint
 } from '../src/config'
@@ -39,6 +40,7 @@ async function getInfo(endpoint, collectionID) {
         chapter.title = getMetadata(itemsData[i].element_texts, "Title")
         chapter.description = getMetadata(itemsData[i].element_texts, "Description")
         let location = getMetadata(itemsData[i].element_texts, "Spatial Coverage")
+        chapter.date = moment(getMetadata(itemsData[i].element_texts, "Date")).valueOf()
         chapter.location = JSON.parse(location)
         chapter.onChapterEnter = []
         chapter.onChapterExit = []
@@ -47,6 +49,7 @@ async function getInfo(endpoint, collectionID) {
         chapters.push(chapter)
     }
 
+    chapters.sort((a, b) => parseInt(a.date) - parseInt(b.date))
     let title = getMetadata(collData.element_texts, "Title")
     let subtitle = getMetadata(collData.element_texts, "Description")
     let byline = getMetadata(collData.element_texts, "Creator")
