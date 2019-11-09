@@ -3,9 +3,10 @@ import * as _ from 'lodash'
 import moment from 'moment'
 import {
     endpoint
-} from '../src/config'
-import * as Collection from '../src/collection'
-import * as Item from '../src/item'
+} from './endpoint'
+import * as Collection from '../src/hms/collection'
+import * as Item from '../src/hms/item'
+import * as Exhibit from '../src/hms/exhibit'
 import {
     build
 } from '../src/story'
@@ -48,7 +49,8 @@ async function getInfo(endpoint, collectionID) {
         chapter.description = getMetadata(itemsData[i].element_texts, "Description")
         let location = getMetadata(itemsData[i].element_texts, "Spatial Coverage")
         let relation = getMetadata(itemsData[i].element_texts, "Relation")
-        chapter.embed = getEmbedCode(relation)
+        if (relation !== "") { chapter.embed = getEmbedCode(relation) }
+        
         chapter.date = moment(getMetadata(itemsData[i].element_texts, "Date")).valueOf()
         chapter.location = JSON.parse(location)
         chapter.onChapterEnter = []
@@ -81,3 +83,6 @@ async function getInfo(endpoint, collectionID) {
 
     return config
 }
+
+let test = Exhibit.getPagesInExhibit(endpoint, 3)
+test.then(data => {console.log(data)})
