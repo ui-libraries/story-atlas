@@ -24,8 +24,8 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "chai": "^4.2.0",
-    "chai-url": "^1.0.4",
     "chai-json": "^1.0.0",
+    "chai-url": "^1.0.4",
     "documentation": "^8.1.2",
     "mocha": "^5.2.0",
     "webpack": "^4.28.4",
@@ -48,6 +48,8 @@
     ]
   },
   "dependencies": {
+    "3": "^2.1.0",
+    "moment": "^2.29.4",
     "node-fetch": "^2.6.0"
   }
 }
